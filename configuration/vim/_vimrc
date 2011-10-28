@@ -1,0 +1,62 @@
+set nocompatible
+source $VIMRUNTIME/vimrc_example.vim
+source $VIMRUNTIME/mswin.vim
+behave mswin
+syntax on
+set nu
+colorscheme chela_light 
+set guifont=DejaVu\ Sans\ Mono:h11
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
+set autoindent
+set smartindent
+set expandtab
+set showmatch
+set ruler
+set guioptions-=m
+set guioptions-=T
+set diffexpr=MyDiff()
+set nobackup
+set nowrap
+set showtabline=2
+filetype plugin indent on
+let g:pydiction_location = 'C:\Program Files\Vim\vim73\ftplugin\pydiction\complete-dict'
+let g:pydiction_menu_height = 7
+map <F1> :w<cr>
+map <F2> :w<cr>
+map <F3> <c-w>=
+map <F4> :tabnew<cr>
+map <F5> :!python.exe %<cr>
+map <F6> :q<cr>
+map <F7> <c-w>\|
+map <F8> :!ruby.exe %<cr>
+map <F9> :nohls<cr>
+map <F10> <c-b>
+map <F11> <c-f>
+map <F12> <c-w><c-w>
+imap <c-e> <ScrollWheelDown>
+imap <c-y> <ScrollWheelUp>
+function MyDiff()
+  let opt = '-a --binary '
+  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+  let arg1 = v:fname_in
+  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+  let arg2 = v:fname_new
+  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+  let arg3 = v:fname_out
+  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+  let eq = ''
+  if $VIMRUNTIME =~ ' '
+    if &sh =~ '\<cmd'
+      let cmd = '""' . $VIMRUNTIME . '\diff"'
+      let eq = '"'
+    else
+      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+    endif
+  else
+    let cmd = $VIMRUNTIME . '\diff'
+  endif
+  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
+endfunction
