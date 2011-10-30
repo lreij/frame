@@ -1,0 +1,4 @@
+[
+    { "keys": ["ctrl+n"], "command": "auto_complete" },
+    { "keys": ["f2"], "command": "save" }
+]

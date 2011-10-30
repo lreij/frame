@@ -1,17 +1,1 @@
-Global.sublime-settings
-// Place user-specific overrides in this file, to ensure they're preserved
-// when upgrading
-{
-    "vintage_start_in_command_mode": true
-}
-
-
-Base File.sublime-settings
-{
-    "color_scheme": "Packages/Color Scheme - Default/iPlastic.tmTheme",
-    "font_face": "Consolas",
-    "font_size": 11,
-    "translate_tabs_to_spaces": true,
-    "highlight_line": true,
-    "rulers": [80]
-}
+.\Data\Packages\User
