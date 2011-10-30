@@ -25,12 +25,13 @@ let g:pydiction_location = 'C:\Program Files\Vim\vim73\ftplugin\pydiction\comple
 let g:pydiction_menu_height = 7
 map <F1> :w<cr>
 map <F2> :w<cr>
+imap <F2> <c-y>,
 map <F3> <c-w>=
 map <F4> :tabnew<cr>
 map <F5> :!python.exe %<cr>
 map <F6> :q<cr>
 map <F7> <c-w>\|
-map <F8> :!ruby.exe %<cr>
+map <F8> :
 map <F9> :nohls<cr>
 map <F10> <c-b>
 map <F11> <c-f>
