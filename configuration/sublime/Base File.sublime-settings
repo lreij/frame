@@ -2,7 +2,7 @@
 // are overridden in turn by file type specific settings. Place your settings
 // here, to ensure they're preserved when upgrading.
 {
-	"color_scheme": "Packages/Color Scheme - Default/iPlastic.tmTheme",
+    "color_scheme": "Packages/Color Scheme - Default/iPlastic.tmTheme",
     "font_face": "Consolas",
     "font_size": 11,
     "translate_tabs_to_spaces": true,
