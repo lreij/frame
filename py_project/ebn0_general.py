@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# ELURUIJ
+# lreij
 from Tkinter import *
 import tkFileDialog, tkFont
 import os

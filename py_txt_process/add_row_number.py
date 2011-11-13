@@ -1,5 +1,5 @@
 # -*- coding:utf-8 -*-
-## Jerry Lu <lreij@163.com>
+## lreij
 """add row number for plain text
     >>> python add_row_number.py xxx.txt
     """

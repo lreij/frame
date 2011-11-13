@@ -1,5 +1,5 @@
 # -*- coding:utf-8 -*-
-# eluruij
+# lreij
 """auto mw"""
 from pywinauto import application
 import os

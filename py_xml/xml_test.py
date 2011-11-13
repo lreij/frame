@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-## Jerry Lu
+## lreij
 """Test for xml"""
 
 import xml.etree.ElementTree as ET

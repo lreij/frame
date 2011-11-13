@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-## Jerry Lu
+## lreij
 """delete file that line1 is 0
 the file should not be read-only.
 """

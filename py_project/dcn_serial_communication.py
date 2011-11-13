@@ -1,5 +1,5 @@
 # -*- coding:utf-8 -*-
-## Jerry Lu
+## lreij
 from __future__ import with_statement
 import visa
 import time

@@ -1,5 +1,5 @@
 # -*- coding:utf-8 -*-
-## eluruij <jerry.lu@ericsson.com>
+## lreij
 import os
 import shutil
 import sqlite3
