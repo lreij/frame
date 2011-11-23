@@ -70,7 +70,7 @@ def generate_per_phy(d, phy):
     d_start_ebn0 = {'CQPSK': 5, '4': 5, '16': 7, '32': 9, '64': 12, 
             '128': 15, '256': 18, '512': 20, '1024': 25}
     context['Ebn0_start_value'] = d_start_ebn0[context['QAM']]
-    context['phymodes'] = ",".join(filter(lambda x: x != 0, d['phymodes']))
+    context['phymodes'] = ",".join([x for x in d['phymodes'] if x != '0'][::-1])
     context['FF_SymbolRate'] = get_item_from_op(d['op'], 138)
     context['Num_of_E1'] = get_item_from_op(d['op'], phy + 122)
     if 'LEG' in context['FF_mode']: setup = d['ff'] + '.txt'
