@@ -1,100 +1,150 @@
-all about mysql
-1 win32 install package, dir better on: C:\mysql
-2 install mysql service:
-	> cd C:\mysql\bin
-	> mysqld-nt -install
-3 start mysql service:
-	> net start mysql
-4 log in mysql:
-	> cd C:\mysql\bin
-	> mysql -uroot
-5 > create database
-6 > show databases
-	show tables
-	describe table
-7 > use database XXX
-8 ODBC
-	/control panel/administrative tools/data sources(ODBC)
-	Add...
-	MySQL ODBC 5.1 Driver
-	Data Source Name: Mysql
-	User: root
-	Database: XXX
-9 Python-ODBC 
-	MySQLdb	http://cdnetworks-kr-2.dl.sourceforge.net/project/mysql-python/mysql-python/1.2.2/MySQL-python-1.2.2.win32-py2.5.exe
-10 LabVIEW mysql
-	LabSQL: http://jeffreytravis.com/lost/labsql.html
-	put /LabSQL function into C:\Program Files\National Instruments\LabVIEW 8.5\user.lib
-10 AUTO_INCREMENT
-CREATE TABLE animals (
-     id MEDIUMINT NOT NULL AUTO_INCREMENT,
-     name CHAR(30) NOT NULL,
-     PRIMARY KEY (id)
- );
-11 SQL
-create database ff;
-create table ts (
-    id mediumint not null auto_increment,
-    name varchar(50) not null,
-    setup varchar(200) not null,
-    result text,
-    log text,
-    primary key (id)
-);
-insert into ts 
-    (name, setup, result, log) 
-    values 
-    ('RPS',
-    'C:\\Users\\eluruij\\svn\\TSS\\Setup files\\RPS\\xx.txt', 
-    'ddddd', 
-    'ddddd');
-select * from ts where id=1;
-delete from ts where id=1;
-select count(*) from ts;
-drop table ts;
-11 to store binary data, like image,excel,txt file
-mysql commandline:
-	> set global max_allowed_packet = 2*1024*1024*10
-close this session, relogin:
-	> show VARIABLES like '%max_allowed_packet%';
-check if max_allowed_packet ok.
-12 python store and get binary data from mysql
-store:
->>> f = open(r"C:\Users\eluruij\Desktop\test_sql\scope_0.bmp", 'rb')
->>> b = f.read()
->>> f.close()
->>> db = MySQLdb.connect(db="test_labview")
->>> c = db.cursor()
->>> c.execute("""
-insert into result 
-    (phymode, result, log, time) 
-    values 
-    ('QAM',
-    %s, 
-    'ddd', 
-    now());
-""", (MySQLdb.Binary(b)))
-1L
->>> db.commit()
-query&get:
->>> c.execute("""
-select * from result where id=4""")
-1L
->>> d = c.fetchone()[2]
->>> f = open(r"C:\Users\eluruij\Desktop\test_sql\cc.bmp", 'wb')
->>> f.write(d)
->>> f.close()
-13 insert current time
-NOW()函数以`'YYYY-MM-DD HH:MM:SS'返回当前的日期时间，可以直接存到DATETIME字段中。
-CURDATE()以’YYYY-MM-DD’的格式返回今天的日期，可以直接存到DATE字段中。
-CURTIME()以’HH:MM:SS’的格式返回当前的时间，可以直接存到TIME字段中。
-例：insert into tablename (fieldname) values (now())
-14 result process
-create table result (
-    id mediumint not null auto_increment,
-    phymode varchar(50) not null,
-    result MEDIUMBLOB,
-    log MEDIUMBLOB,
-    time datetime not null,
-    primary key (id)
-);
+All About Mysql
+---------------
+
+0   never use "case" as column name, case is a keyword of mysql.
+
+1   win32 install package, dir better on: C:\mysql
+
+2   install mysql service:
+        > cd C:\mysql\bin
+        > mysqld-nt -install
+
+3   start mysql service:
+        > net start mysql
+
+4   log in mysql:
+        > cd C:\mysql\bin
+        > mysql -uroot
+
+5   > create database
+
+6   > show databases
+	> show tables
+	> describe table
+
+7   > use database XXX
+
+8   ODBC
+        /control panel/administrative tools/data sources(ODBC)
+        Add...
+        MySQL ODBC 5.1 Driver
+            Data Source Name: Mysql
+            User: root
+            Database: XXX
+
+9   Python-ODBC 
+        MySQLdb	http://cdnetworks-kr-2.dl.sourceforge.net/project/mysql-python/mysql-python/1.2.2/MySQL-python-1.2.2.win32-py2.5.exe
+
+10  LabVIEW mysql
+        LabSQL: http://jeffreytravis.com/lost/labsql.html
+        put /LabSQL function into C:\Program Files\National Instruments\LabVIEW 8.5\user.lib
+        
+11  AUTO_INCREMENT
+        CREATE TABLE animals (
+             id MEDIUMINT NOT NULL AUTO_INCREMENT,
+             name CHAR(30) NOT NULL,
+             PRIMARY KEY (id)
+         );
+
+12  SQL
+        create database ff;
+        create table ts (
+            id mediumint not null auto_increment,
+            name varchar(50) not null,
+            setup varchar(200) not null,
+            result text,
+            log text,
+            primary key (id)
+        );
+        insert into ts 
+            (name, setup, result, log) 
+            values 
+            ('RPS',
+            'C:\\Users\\eluruij\\svn\\TSS\\Setup files\\RPS\\MMU2H_QAM_ADAPTIVE_R1_CS7_E_phy4_RPS.txt', 
+            'ddddd', 
+            'ddddd');
+        select * from ts where id=1;
+        delete from ts where id=1;
+        select count(*) from ts;
+        drop table ts;
+
+13  to store binary data, like image,excel,txt file
+        mysql commandline:
+            > set global max_allowed_packet = 2*1024*1024*10
+        close this session, relogin:
+            > show VARIABLES like '%max_allowed_packet%';
+        check if max_allowed_packet ok.
+
+14  python store and get binary data from mysql
+    store:
+        >>> f = open(r"C:\Users\eluruij\Desktop\test_sql\scope_0.bmp", 'rb')
+        >>> b = f.read()
+        >>> f.close()
+        >>> db = MySQLdb.connect(db="test_labview")
+        >>> c = db.cursor()
+        >>> c.execute("""
+        insert into result 
+            (phymode, result, log, time) 
+            values 
+            ('QAM16',
+            %s, 
+            'ddd', 
+            now());
+        """, (MySQLdb.Binary(b)))
+        1L
+        >>> db.commit()
+    query&get:
+        >>> c.execute("""
+        select * from result where id=4""")
+        1L
+        >>> d = c.fetchone()[2]
+        >>> f = open(r"C:\Users\eluruij\Desktop\test_sql\cc.bmp", 'wb')
+        >>> f.write(d)
+        >>> f.close()
+
+15  insert current time
+        NOW()函数以`'YYYY-MM-DD HH:MM:SS'返回当前的日期时间，可以直接存到DATETIME字段中。
+        CURDATE()以’YYYY-MM-DD’的格式返回今天的日期，可以直接存到DATE字段中。
+        CURTIME()以’HH:MM:SS’的格式返回当前的时间，可以直接存到TIME字段中。
+        例：insert into tablename (fieldname) values (now())
+
+16  result process
+        create table result (
+            id mediumint not null auto_increment,
+            phymode varchar(50) not null,
+            result MEDIUMBLOB,
+            log MEDIUMBLOB,
+            time datetime not null,
+            primary key (id)
+        );
+
+17  远程控制Mysql
+        > mysql -h "192.168.1.1" -u root -p
+        默认没有开启远程控制，需要添加远程访问用户。
+        > use mysql
+        > select host, user from user;
+        > update user set host='%' where host='localhost';
+        or
+        > grant all privileges on "." to root@"%" identified by "yourpassword";
+        > flush privileges;
+
+18  Build Labview with python
+        need add py.vi into labview project, and add it to always included.
+
+19  Mysql 数据备份与还原
+        备份:
+            mysqldump -u root -p  dbcurr> 20090219.sql
+            mysqldump  备份命令
+            root       用户名(root管理员)
+            dbcurr   备份的数据库名;
+            >           备份符号
+            20090219.sql    备份的文件名
+        还原:
+            mysql -u root -p dbcurr< d:\20090219.sql
+            mysql   还原命令
+            root       用户名(root管理员)
+            dbcurr   备份的数据库名;
+            <           还原符号
+            20090219.sql    还原的文件名
+        mysqldump 远程备份
+            mysqldump -h ip -uroot -proot database > c:\data.sql
