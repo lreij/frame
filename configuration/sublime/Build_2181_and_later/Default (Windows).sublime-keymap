@@ -1,0 +1,5 @@
+[
+    { "keys": ["ctrl+n"], "command": "auto_complete" },
+    { "keys": ["f2"], "command": "save" },
+    { "keys": ["f12"], "command": "toggle_side_bar" }
+]
